@@ -268,7 +268,105 @@
 
 ---
 
+# System Calls in Operating System
 
+## Definition
+
+* A **system call** is a programmatic way for a process to request a service from the OS kernel.
+* Acts as the **only entry point into the kernel**, executed in **kernel mode**.
+* Allows programs to interact with OS instead of directly managing hardware.
+
+---
+
+## Key Points
+
+* Written in high-level languages (C, C++, Pascal) or assembly.
+* Triggered by a specific instruction → switch to kernel mode → OS executes request → result returned.
+* Prevents inconsistent/error-prone direct hardware handling.
+
+---
+
+## Services Provided by System Calls
+
+1. **Process Management** – create, terminate, wait, fork, etc.
+2. **Memory Management** – allocate/free memory.
+3. **File Management** – create, open, read, write, delete, close.
+4. **Device Management** – read/write to devices.
+5. **Information Maintenance & Communication** – get/set system info, IPC.
+6. **Protection & Networking** – security and communication services.
+
+---
+
+## Features
+
+* **Interface** – standard interface between user programs & OS.
+* **Protection** – allows access to privileged operations safely.
+* **Kernel Mode** – switch from user → kernel mode for execution.
+* **Context Switching** – involves saving/restoring process state.
+* **Error Handling** – returns error codes for failed requests.
+* **Synchronization** – ensures safe shared resource access (locks, semaphores).
+
+---
+
+## Working of System Calls (Steps)
+
+1. Program needs OS-controlled resource (file, memory, device).
+2. Program issues a **system call** instruction.
+3. OS intercepts and transfers control to **Kernel**.
+4. Kernel performs requested operation.
+5. Control is returned to program.
+
+---
+
+## Types of System Calls
+
+* **Process Control** – `fork()`, `exit()`, `wait()`
+* **File Manipulation** – `open()`, `read()`, `write()`, `close()`
+* **Device Management** – `ioctl()`, `read()`, `write()`
+* **Information Maintenance** – `getpid()`, `alarm()`, `sleep()`
+* **Communication** – `pipe()`, `shmget()`, `mmap()`
+* **Protection** – `chmod()`, `umask()`, `chown()`
+
+---
+
+## Example (Windows vs Unix)
+
+| Category              | Windows Example                    | Unix Example          |
+| --------------------- | ---------------------------------- | --------------------- |
+| **Process Control**   | `CreateProcess()`, `ExitProcess()` | `fork()`, `exit()`    |
+| **File Manipulation** | `CreateFile()`, `ReadFile()`       | `open()`, `read()`    |
+| **Device Management** | `ReadConsole()`, `WriteConsole()`  | `ioctl()`, `read()`   |
+| **Info Maintenance**  | `GetCurrentProcessID()`, `Sleep()` | `getpid()`, `alarm()` |
+| **Communication**     | `CreatePipe()`, `MapViewOfFile()`  | `pipe()`, `shmget()`  |
+| **Protection**        | `SetFileSecurity()`                | `chmod()`, `umask()`  |
+
+---
+
+## Parameter Passing Methods
+
+1. **Registers** – simple but limited by number of registers.
+2. **Address of Block** – parameters stored in block; address passed in register (common in Linux/Solaris).
+3. **Stack** – parameters pushed onto stack, OS retrieves them.
+
+---
+
+## Advantages
+
+* Provides hardware access.
+* Enables memory & process management.
+* Ensures security & standardization across platforms.
+
+---
+
+## Disadvantages
+
+* **Performance overhead** – due to user ↔ kernel mode switch.
+* **Security risks** – if misused or exploited.
+* **Complex error handling**.
+* **Compatibility issues** – differ across OS.
+* **Resource consumption** in high-load environments.
+
+---
 
 
 
