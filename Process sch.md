@@ -111,19 +111,72 @@
 * Deadlocks possible.
 * Frequent context switching → performance loss.
 
+# Process Table and Process Control Block (PCB)
 
+## Process Control Block (PCB)
+- **Definition:** Data structure used by the OS to store information about a process and manage execution.  
+- **Key Points:**
+  - Each process has a **unique Process ID (PID)**.
+  - Stores **state, program counter, stack pointer, registers, open files, scheduling info**.
+  - Updated during **state transitions**.
+  - Essential for **context switching**.
 
+### Structure of PCB
+- **Pointer:** Saves stack pointer during state switch.  
+- **Process State:** Current state (Running, Ready, Waiting, etc.).  
+- **Process ID:** Unique identifier (PID).  
+- **Program Counter:** Address of the next instruction.  
+- **Registers:** CPU register values saved/restored during context switch.  
+- **Memory Limits:** Info about memory management (page/segment tables).  
+- **Open Files List:** Tracks files opened by the process.  
 
+### Advantages of PCB
+1. **Stores Process Details:** PID, state, registers, memory, etc.  
+2. **Helps Resume Processes:** Saves execution point for context switching.  
+3. **Smooth Execution:** Manages CPU, memory, files, devices.  
+4. **Facilitates Context Switching:** Saves/restores process states.  
+5. **Aids in Scheduling:** Holds priority, policy, quantum.  
+6. **Resource Allocation:** Tracks files, memory, I/O devices.  
 
+### Disadvantages of PCB
+- High **memory usage** (one PCB per process).  
+- **Context switching overhead** (time to save/load PCB).  
+- **Security risk** if PCB is not protected.  
 
-
-
-
-
-
-* Registers + PC must be saved.
-* TLB entries may be flushed (not always saved).
+### Additional Notes
+- **Interrupt Handling:** PCB stores info on interrupts.  
+- **Context Switching:** Saves state of current process, loads next.  
+- **Real-Time Systems:** PCB may include deadlines/priorities.  
+- **Virtual Memory:** PCB holds page tables, fault handling.  
+- **Fault Tolerance:** Some OSes keep multiple PCB copies.  
+- **Storage Location:** Kept in protected memory (often kernel stack).  
 
 ---
 
-Do you want me to also **add diagrams (like process states, context switch flow, or scheduling timelines) in ASCII / Markdown-friendly form**, or should I keep notes strictly text-based?
+## Process Table
+- **Definition:** OS data structure containing an entry (PCB) for each active process.  
+- **Purpose:** Efficient **management, scheduling, and switching** between processes.  
+- **Contents:** PID, state, program counter, CPU registers, memory use, resources.  
+
+### Advantages of Process Table
+1. **Tracks Processes:** Centralized record of all active processes.  
+2. **Helps Scheduling:** Contains priority, burst time, arrival time.  
+3. **Easy Management:** Allows create, suspend, resume, terminate.  
+4. **Facilitates Context Switching:** Stores registers, stack pointers, etc.  
+5. **Supports IPC:** Contains pointers/flags for shared memory, pipes, queues.  
+6. **Resource Allocation:** Tracks memory, files, I/O devices.  
+7. **Deadlock Handling:** Maintains locks held/requested.  
+8. **Security & Access Control:** Includes user ID, permissions.  
+9. **Debugging & Monitoring:** Used by tools (`ps`, `top`).  
+
+### Disadvantages of Process Table
+- Consumes **memory** (large table for many processes).  
+- **Slower operations** with too many entries.  
+- Adds **system overhead** (frequent updates).  
+
+---
+
+## Key Difference
+- **Process Table:** Global structure holding all processes.  
+- **PCB:** Individual structure with details of one process.  
+
